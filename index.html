@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreatorAI Hub — AI Creator Marketplace</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<header class="shell">
+  <nav class="nav">
+    <div class="brand"><div class="brandmark">✳</div><span>CreatorAI <em>Hub</em></span></div>
+    <div class="navlinks"><a href="#discover">Discover creators</a><a href="#briefs">Creative briefs</a><a href="#how">How it works</a></div>
+    <div class="navright"><button class="btn" onclick="scrollToBrief()">Post a brief</button><button class="btn primary" onclick="showToast('Welcome! Creator sign-up flow can be connected next.')">Join as creator ↗</button></div>
+  </nav>
+</header>
+<main class="shell">
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> The AI-native creative marketplace</div>
+    <h1>Big ideas need<br><span class="accent">AI creators.</span></h1>
+    <p>Find the creative minds turning prompts into powerful visuals. Discover verified AI filmmakers, animators and generative artists — then take your next campaign from brief to final frame.</p>
+    <div class="hero-actions"><button class="btn primary" onclick="document.getElementById('discover').scrollIntoView({behavior:'smooth'})">Explore creators ↗</button><button class="btn" onclick="scrollToBrief()">＋ Create a brief</button></div>
+    <div class="stats"><div class="stat"><strong>1,240+</strong><span>Creative talents</span></div><div class="stat"><strong>3.8k</strong><span>Portfolio projects</span></div><div class="stat"><strong>92%</strong><span>Brief match rate</span></div></div>
+  </div>
+  <div class="hero-art">
+    <div class="orb"></div>
+    <div class="float-card fc1"><small>CREATOR VERIFIED</small><b>✓ Workflow checked</b></div>
+    <div class="float-card fc2"><small>AI VIDEO · 9:16</small><b>Campaign-ready output</b></div>
+    <div class="float-card fc3"><small>TOOLS IN THE PIPELINE</small><b>Runway · Midjourney · Veo</b></div>
+    <div class="hero-art-bottom"><div><h3>Make the unreal, real.</h3><span>Creative work, reimagined.</span></div><span>✦ Curated talent</span></div>
+  </div>
+</section>
+<section id="discover" class="section-anchor">
+  <div class="section-head"><div><div class="eyebrow">✦ Talent directory</div><h2>Meet your next creative partner</h2><p>Explore AI-native portfolios, tools, workflows and specialties.</p></div><div class="pill" id="countPill">6 creators available</div></div>
+  <div class="searchbar"><div class="searchbox"><span class="search-icon">⌕</span><input id="searchInput" placeholder="Search creators, skills, tools or styles..." oninput="renderCreators()"></div><button class="btn" onclick="clearFilters()">Reset filters ↺</button></div>
+  <div class="filters">
+    <select id="skillFilter" onchange="renderCreators()"><option value="">All specializations</option><option>AI Filmmaking</option><option>AI Animation</option><option>Product Visuals</option><option>Generative Art</option><option>AI Advertising</option></select>
+    <select id="toolFilter" onchange="renderCreators()"><option value="">Any AI tool</option><option>Midjourney</option><option>Runway</option><option>Veo</option><option>Stable Diffusion</option><option>Kling</option><option>Blender</option></select>
+    <select id="typeFilter" onchange="renderCreators()"><option value="">Any content type</option><option>Video</option><option>Animation</option><option>Images</option><option>3D</option></select>
+    <select id="licenseFilter" onchange="renderCreators()"><option value="">Any usage rights</option><option value="yes">Commercial use available</option><option value="no">Discuss licensing</option></select>
+    <div class="filter-note">↳ <span id="resultCount">6</span> matching profiles</div>
+  </div>
+  <div class="creator-grid" id="creatorGrid"></div>
+</section>
+<section id="briefs" class="brief-section section-anchor">
+  <div class="brief-layout">
+    <div class="brief-copy"><div class="eyebrow">✦ Brief studio</div><h2>From “what if?”<br>to a creative brief.</h2><p>Give creators a clear direction. Describe your rough idea and shape it into a structured brief with deliverables, visual direction, aspect ratio, deadline and commercial-use requirements.</p>
+      <div class="feature"><span class="check">✓</span> Clear scope and deliverables</div>
+      <div class="feature"><span class="check">✓</span> Format and platform requirements</div>
+      <div class="feature"><span class="check">✓</span> Licensing expectations up front</div>
+      <div class="feature"><span class="check">✦</span> AI-assisted brief starter</div>
+    </div>
+    <div class="brief-form">
+      <form id="briefForm">
+        <div class="form-grid">
+          <div class="field full"><label for="idea">Your rough idea *</label><textarea id="idea" required placeholder="e.g. A futuristic product launch video for our new sneaker, with surreal liquid-metal visuals..."></textarea><div class="hint">The brief assistant will use this to draft a more complete brief.</div></div>
+          <div class="field"><label for="campaign">Campaign / brand name</label><input id="campaign" placeholder="e.g. Nova Sneakers"></div>
+          <div class="field"><label for="contentType">Content type *</label><select id="contentType" required><option value="">Choose a format</option><option>AI video ad</option><option>Short-form social video</option><option>3D animation</option><option>Product visuals / images</option><option>AI film</option><option>Generative art series</option></select></div>
+          <div class="field"><label for="style">Visual style *</label><select id="style" required><option value="">Choose a direction</option><option>Cinematic / photoreal</option><option>Surreal / dreamlike</option><option>3D / stylized animation</option><option>Minimal / premium</option><option>Bold / experimental</option><option>UGC / social-native</option></select></div>
+          <div class="field"><label for="ratio">Aspect ratio *</label><select id="ratio" required><option>9:16 — Reels / Shorts</option><option>16:9 — YouTube / web</option><option>1:1 — Square social</option><option>4:5 — Instagram feed</option><option>Multiple formats</option></select></div>
+          <div class="field"><label for="deadline">Target deadline</label><input id="deadline" type="date"></div>
+          <div class="field"><label for="budget">Estimated budget (INR)</label><select id="budget"><option>Open to proposals</option><option>₹5,000–₹15,000</option><option>₹15,000–₹50,000</option><option>₹50,000–₹1,00,000</option><option>₹1,00,000+</option></select></div>
+          <div class="field"><label for="license">Commercial usage *</label><select id="license" required><option value="">Choose usage rights</option><option>Paid ads + organic social</option><option>Organic social only</option><option>Full commercial usage</option><option>Discuss with creator</option></select></div>
+          <div class="field full"><label for="deliverables">Deliverables & extra requirements</label><textarea id="deliverables" placeholder="e.g. 3 videos, 15 seconds each, subtitles, source project, 2 revision rounds..."></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn primary" type="button" onclick="generateBrief()">✦ Build my brief</button><button class="btn" type="submit">Save brief locally</button></div>
+        <div class="output" id="briefOutput"></div>
+      </form>
+    </div>
+  </div>
+</section>
+<section id="how" style="padding:0 0 48px">
+ <div class="section-head"><div><div class="eyebrow">Simple by design</div><h2>From discovery to delivery</h2><p>One home for the creative process — not just a list of freelancers.</p></div></div>
+ <div class="creator-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+  <div class="creator-card" style="padding:20px"><div class="pill">01 · DISCOVER</div><h3>Find the right talent</h3><p class="bio">Search by skill, specialization, tools, output type and commercial-use needs.</p></div>
+  <div class="creator-card" style="padding:20px"><div class="pill">02 · BRIEF</div><h3>Align on the vision</h3><p class="bio">Build a structured brief with formats, visual direction, deliverables and rights.</p></div>
+  <div class="creator-card" style="padding:20px"><div class="pill">03 · COLLABORATE</div><h3>Make work together</h3><p class="bio">Review portfolio evidence, discuss workflows and keep expectations clear.</p></div>
+ </div>
+</section>
+<footer class="footer"><div class="brand" style="font-size:15px"><div class="brandmark" style="width:27px;height:27px;border-radius:8px">✳</div><span>CreatorAI <em>Hub</em></span></div><span>Prototype demo · Sample creator data · Built for the AI Content Creator Marketplace challenge</span></footer>
+</main>
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()"><div class="modal" id="modalContent"></div></div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
